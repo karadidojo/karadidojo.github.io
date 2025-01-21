@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond Simple Chat: The Complex Reality of Building Robust LLM Agents</title>
+    <title>Blog</title>
     <style>
       body {
         font-family: sans-serif;
@@ -25,8 +25,23 @@
 </head>
 <body>
 
-    <h1>Beyond Simple Chat: The Complex Reality of Building Robust LLM Agents</h1>
+    
+    <h1>blog1</h1>
+    <h1>date1</h1>
+    <p>content1</p>
 
+    <h1>blog2</h1>
+    <h1>date2</h1>
+    <p>content2</p>
+
+    <h1>blog3</h1>
+    <h1>date3</h1>
+    <p>content3</p>
+
+
+    
+    <h1>Beyond Simple Chat: The Complex Reality of Building Robust LLM Agents</h1>
+    <h1>01-09-2025</h1>
     <p>We've all seen the demos: a conversational AI that answers questions, writes simple text, and seems almost magical. But the reality of building truly powerful, reliable LLM-powered agents is far more nuanced than a basic chat interface. When you start demanding complex tasks – tool calling, multi-step reasoning, intricate decision-making – the simplicity quickly dissolves, and the underlying architecture becomes crucial. It’s no longer just about a prompt and a response; it's about carefully orchestrating a symphony of components.</p>
 
     <p>One of the first challenges you encounter is the need for structured output from the LLM. A free-form text response is useless when you need to trigger specific actions. You can't ask an LLM to "call the weather API" and hope it does the right thing without explicit guidance. Instead, you need it to respond with something structured – typically, a JSON payload with fields like <code>"Thought"</code>, and <code>"Action"</code>, that your application can understand and act upon. This immediately reveals the deep link between your system prompt and your parsing logic. The system prompt isn’t just fluff; it’s the foundation that dictates how the LLM will format its responses and, thus, how your parsing mechanism works.</p>
