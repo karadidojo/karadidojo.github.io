@@ -26,8 +26,7 @@
 <body>
 
     
-    <h1>blog1</h1>
-    <h1>date1</h1>
+    <h1>01-20-2025</h1>
         <article>
         <h1>Unlock Smaller, Faster LLMs: A Beginner's Guide to Distillation</h1>
 
@@ -80,57 +79,6 @@
             <h2>A Simple Analogy</h2>
             <p>Imagine a master chef (the teacher LLM) who has honed their skills over years. They can perfectly predict how a dish will taste even before it's fully cooked. A young apprentice chef (the student model) is learning. Instead of just telling the apprentice "add salt," the master chef explains <em>why</em> a certain amount of salt is needed, considering the other ingredients and the desired flavor profile. The apprentice learns not just the recipe, but the underlying principles of cooking, allowing them to adapt and create similar dishes.</p>
         </div>
-
-        <div class="section">
-            <h2>Simplified Code Example (Conceptual)</h2>
-            <p>While a full implementation requires deep learning frameworks like TensorFlow or PyTorch, here's a conceptual illustration of the distillation loss:</p>
-            <pre class="code-block">
-                <code>
-# Assuming you have the teacher's output probabilities (teacher_probs)
-# and the student's output probabilities (student_probs)
-# and the true labels (true_labels)
-
-import torch
-import torch.nn.functional as F
-
-def distillation_loss(student_logits, teacher_logits, true_labels, temperature=2.0, alpha=0.5):
-    """
-    Calculates the distillation loss.
-
-    Args:
-        student_logits: Logits from the student model.
-        teacher_logits: Logits from the teacher model.
-        true_labels: Ground truth labels.
-        temperature: Temperature for softening probabilities.
-        alpha: Weighting factor for the soft label loss.
-    """
-
-    # Soften probabilities using temperature
-    teacher_probs = F.softmax(teacher_logits / temperature, dim=-1)
-    student_probs = F.log_softmax(student_logits / temperature, dim=-1)
-
-    # Soft label loss (KL Divergence)
-    soft_loss = F.kl_div(student_probs, teacher_probs, reduction='batchmean') * (temperature ** 2)
-
-    # Hard label loss (Cross-Entropy)
-    hard_loss = F.cross_entropy(student_logits, true_labels)
-
-    # Combined loss
-    loss = alpha * soft_loss + (1 - alpha) * hard_loss
-    return loss
-
-# Example usage (placeholder values)
-teacher_output = torch.randn(32, 10)  # Batch size 32, 10 classes
-student_output = torch.randn(32, 10)
-labels = torch.randint(0, 10, (32,))
-
-loss = distillation_loss(student_output, teacher_output, labels)
-print(f"Distillation Loss: {loss.item()}")
-                </code>
-            </pre>
-            <p><strong>Note:</strong> This is a highly simplified example. Real-world implementations involve more complex model architectures, training procedures, and careful hyperparameter tuning.</p>
-        </div>
-
         <div class="section">
             <h2>Key Considerations for LLM Distillation</h2>
             <p>Successful LLM distillation involves careful consideration of several factors:</p>
