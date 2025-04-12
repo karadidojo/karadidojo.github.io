@@ -117,14 +117,11 @@
    <p>There’s no doubt that shifting to code as an action language for LLM agents is more complex to implement initially. But this approach is essential for building truly robust, reliable, and powerful LLM-driven applications. We must be careful not to overwhelm the LLM with overly complex code, but with the right approach, we can unleash the full potential of these transformative technologies. Careful planning around monitoring, testing, and observability are also key to making sure these systems are functioning as expected, and allow us to gain critical insights into their behavior. This isn't just an incremental improvement; it's a paradigm shift, moving us beyond the limitations of simple chat interfaces and into a future where LLMs can be sophisticated and dynamic agents. The future of AI is in building these kinds of thoughtfully designed, highly abstracted building blocks.</p>
 
 
-Okay, here is the blog post tutorial formatted as an HTML document. You can save this code as an .html file (e.g., model-context-protocol.html) and open it in a web browser.
-
-I've included basic structure and semantic tags. You would typically link a CSS file in the <head> section to style it appropriately.
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Context Protocol Tutorial: Better LLM Results</title>
+    <title>Model Context Protocol Tutorial: Better LLM Results 4/11/2025</title>
     <!-- Link to your CSS file here -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
@@ -268,14 +265,77 @@ Response: The Y2 earbuds are IPX4 water-resistant, meaning they are splash-proof
 
         <h2>Structuring the Context: The "Protocol" in Action</h2>
 
-        <p>Simply throwing all these components together isn't enough. The <strong>order</strong> and <strong>formatting</strong> matter. This is where the "protocol" aspect comes in – defining a consistent structure.</p>
-
-        <ul>
             <li><strong>Use Clear Delimiters:</strong> Use distinct markers (like XML-style tags <code><system></code>, <code></system></code>, <code><user></code>, <code></user></code>, <code><context></code>, <code></context></code>,
 
+     <p>Simply throwing all these components together isn't enough. The <strong>order</strong> and <strong>formatting</strong> matter. This is where the "protocol" aspect comes in – defining a consistent structure.</p>
 
-    
-    
+        <ul>
+            <li><strong>Use Clear Delimiters:</strong> Use distinct markers (like XML-style tags <code><system></code>, <code></system></code>, <code><user></code>, <code></user></code>, <code><context></code>, <code></context></code>, or markdown sections <code>### System Prompt ###</code>) to separate different components. This helps the model differentiate between instructions, user input, and retrieved data.</li>
+            <li><strong>Prioritize Information:</strong> The placement of information can influence the model.
+                <ul>
+                    <li>System prompts often go first.</li>
+                    <li>Some research suggests models pay more attention to information at the very beginning and very end of the context window ("lost in the middle" effect). Place critical instructions or data accordingly.</li>
+                    <li>User query is often placed near the end, immediately preceding where the model should generate its response.</li>
+                </ul>
+            </li>
+            <li><strong>Be Explicit:</strong> Clearly label each piece of information. Instead of just pasting document text, label it: <code>Relevant Document Snippet:</code></li>
+            <li><strong>Consistency is Key:</strong> Use the same structure for every call related to a specific task.</li>
+        </ul>
+
+        <h2>A Simple Conceptual Example:</h2>
+
+        <pre><code><system_prompt>
+You are a helpful, friendly, and concise customer support assistant for 'GadgetStore'.
+Only answer questions related to our products listed in the provided document.
+Do not provide external links. Format your response in markdown.
+Base your answer *only* on the provided context information.
+</system_prompt>
+
+<conversation_history>
+User: Do you sell noise-cancelling headphones?
+Assistant: Yes, we have several models. Are you interested in over-ear or in-ear?
+User: Over-ear.
+</conversation_history>
+
+<retrieved_context>
+[DOCUMENT START]
+GadgetStore Return Policy:
+- Items can be returned within 30 days of purchase with a receipt.
+- Headphones are eligible if unopened or defective. Opened, non-defective headphones cannot be returned for hygiene reasons.
+- Return shipping is paid by the customer unless the item is defective.
+[DOCUMENT END]
+</retrieved_context>
+
+<user_query>
+What's the return policy for the over-ear headphones if I open them but don't like the sound?
+</user_query>
+
+<assistant_response_start>
+</code></pre>
+        <p><strong>(The LLM generates its response here)</strong></p>
+
+        <h2>Practical Tips for Developing Your Protocol:</h2>
+        <ol>
+            <li><strong>Start Simple:</strong> Begin with just a system prompt and user query. Add complexity (history, RAG) as needed.</li>
+            <li><strong>Know Your Model:</strong> Different models might respond slightly differently to various structures. Experiment!</li>
+            <li><strong>Manage Context Window:</strong> Be mindful of token limits. Develop strategies for summarizing history or retrieving only the most relevant data chunks.</li>
+            <li><strong>Iterate and Test:</strong> Prompt engineering is iterative. Test your protocol with various queries, evaluate the responses, and refine the structure and instructions.</li>
+            <li><strong>Use Role-Playing:</strong> Explicitly assigning roles (e.g., <code>User:</code>, <code>Assistant:</code>, <code>System:</code>) can significantly improve coherence, especially for chat applications.</li>
+        </ol>
+
+        <h2>Conclusion</h2>
+
+        <p>While "Model Context Protocol" isn't a formal standard, adopting the <strong>mindset</strong> of structuring your LLM inputs systematically is essential for unlocking their true potential. By carefully defining, organizing, and formatting the information you provide – including system instructions, user queries, history, and relevant data – you move from hoping for good results to actively engineering them.</p>
+
+        <p>Start thinking about your interactions not just as simple prompts, but as well-defined context packages. Your LLMs (and your users) will thank you!</p>
+
+        <hr>
+
+        <p><strong>What are your tips for structuring context for LLMs? Share them in the comments below!</strong></p>
+
+    </article>
+
 </body>
+    
 </html>
 
